@@ -14,7 +14,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <ClerkProvider>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
