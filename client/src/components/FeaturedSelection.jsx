@@ -16,6 +16,12 @@ const FeaturedSelection = () => {
                 <ArrowRight className='group-hover:translate-x-1 transition-all duration-100 w-5 h-5' />
             </button>
         </div>
+
+        <div></div>
+
+        <div className='flex justify-center mt-20'>
+          <button onClick={()=>{navigate('/movies'); scrollTo(0,0)}} className='px-10 py-3 text-md tracking-wider bg-primary hover:bg-primary-dull transition-all duration-150 rounded-2xl font-bold text-black cursor-pointer'>Show more..</button>
+        </div>
      </div>
     </>
   )
