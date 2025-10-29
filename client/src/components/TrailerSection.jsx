@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import { dummyTrailers } from '../assets/assets'
 import BlurCircle from './BlurCircle'
 
