@@ -76,6 +76,26 @@ export const dummyShowsData = [
         "runtime": 102,
     },
     {
+  "_id": "879321",
+  "id": 879321,
+  "title": "Echoes of Eternity",
+  "overview": "In a distant future, a scientist discovers a way to communicate with the past — but every message sent changes the world forever. Now she must race against time to fix reality before it collapses.",
+  "poster_path": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1722536434i/215511409.jpg",
+  "backdrop_path": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1722536434i/215511409.jpg",
+  "genres": [
+    { "id": 878, "name": "Science Fiction" },
+    { "id": 53, "name": "Thriller" },
+    { "id": 18, "name": "Drama" }
+  ],
+  "casts": dummyCastsData,
+  "release_date": "2025-05-15",
+  "original_language": "en",
+  "tagline": "Every message changes destiny.",
+  "vote_average": 8.1,
+  "vote_count": 12500,
+  "runtime": 117
+},
+    {
         "_id": "1232546",
         "id": 1232546,
         "title": "Until Dawn",

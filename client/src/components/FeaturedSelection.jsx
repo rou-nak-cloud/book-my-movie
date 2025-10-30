@@ -12,6 +12,7 @@ const FeaturedSelection = () => {
      <div className='px-6 md:px-15 lg:px-24 xl:px-44 overflow-hidden'>
         <div className='relative flex items-center justify-between pt-20 pb-10'>
             <BlurCircle top='0' right='-70px' />
+            <BlurCircle top='500px' right='1000px' />
             <p className='text-gray-300 font-medium text-lg'>Now showing</p>
             <button onClick={()=>navigate('/movies')} className='group flex items-center gap-2 text-sm text-gray-300 cursor-pointer'>
                 View All
@@ -19,14 +20,14 @@ const FeaturedSelection = () => {
             </button>
         </div>
 
-        <div className='flex flex-wrap max-sm:justify-center gap-9 mt-8'>
-          {dummyShowsData.slice(0,4).map((show)=>(
+        <div className='flex flex-wrap max-sm:justify-center gap-8 mt-8'>
+          {dummyShowsData.slice(0,8).map((show)=>(
             <MovieCard key={show._id} movie={show} />
           ))}
         </div>
 
         <div className='flex justify-center mt-20'>
-          <button onClick={()=>{navigate('/movies'); scrollTo(0,0)}} className='px-10 py-3 text-md tracking-wider bg-primary hover:bg-primary-dull transition-all duration-150 rounded-2xl font-bold text-black cursor-pointer'>Show more..</button>
+          <button onClick={()=>{navigate('/movies'); scrollTo(0,0)}} className='px-10 py-3 w-[30%] text-[.9vw] tracking-widest uppercase bg-primary hover:bg-primary-dull transition-all duration-150 rounded-4xl font-bold text-black cursor-pointer'>Show more..</button>
         </div>
      </div>
     </>

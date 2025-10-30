@@ -10,9 +10,11 @@ const TrailerSection = () => {
   return (
     <>
      <div className='px-6 md:px-16 lg:px-24 xl:px-44 py-20 '>
-        <p className='text-gray-400 font-medium text-lg max-w-[960px] mx-auto'>Trailers</p>
+        <p className='text-gray-300 font-medium text-lg max-w-[960px] mx-auto'>Trailers</p>
         <div className='relative mt-6 flex justify-center'>
             <BlurCircle top='100px' right='-150px' />
+            <BlurCircle top='300px' right='-40px' />
+            <BlurCircle top='200px' right='1040px' />
             <iframe 
             src={currentTrailer.videoUrl}
             title="Trailer" 
