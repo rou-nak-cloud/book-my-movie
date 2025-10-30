@@ -2,6 +2,10 @@
 
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
     --color-primary: #F84565;
     --color-primary-dull: #d63854;
