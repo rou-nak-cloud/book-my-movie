@@ -23,6 +23,14 @@ const Navbar = () => {
 
         <Link 
           onClick={()=> {scrollTo(0,0); setIsOpen(false)}} 
+          to='/' 
+          className="transition-all duration-300 hover:text-primary hover:scale-110"
+        >
+          Home
+        </Link>
+
+        <Link 
+          onClick={()=> {scrollTo(0,0); setIsOpen(false)}} 
           to='/movies' 
           className="transition-all duration-300 hover:text-primary hover:scale-110"
         >
