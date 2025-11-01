@@ -24,7 +24,7 @@ const MovieCard = ({movie}) => {
             {new Date(movie.release_date).getFullYear()} | {movie.genres.slice(0,2).map(genre=>genre.name).join(" | ")} | {timeFormat(movie.runtime)}
         </p>
         <div className='flex items-center justify-center w-[90%] mt-4 pb-3'>
-            <button onClick={()=>{navigate('/movies/${movie._id'); scrollTo(0,0)}}
+            <button onClick={()=>{navigate(`/movies/${movie._id}`); scrollTo(0,0)}}
              className='px-4 py-2 text-md w-[80%] tracking-wider bg-primary hover:bg-primary-dull transition-all rounded-full font-medium text-[1vw] hover:text-[1.05vw] text-black cursor-pointer duration-200'>Buy Tickets</button>      
         </div>
      </div>
