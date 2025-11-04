@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { dummyDateTimeData, dummyShowsData } from '../assets/assets'
 import BlurCircle from '../components/BlurCircle'
-import { StarIcon } from 'lucide-react'
+import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react'
 import timeFormat from '../components/timeFormat'
 
 const MovieDetails = () => {
@@ -33,7 +33,7 @@ const MovieDetails = () => {
         style={{ backgroundImage: `url(${show.movie.backdrop_path || show.movie.poster_path})` }}
       ></div>
     <div className='px-6 md:px-10 lg:px-30 pt-30 md:pt-70 mb-5 md:mb-10'>
-    <div className='flex  flex-col md:flex-row gap-8 max-w-6xl mx-auto'>
+    <div className='flex flex-col md:flex-row gap-8 max-w-6xl mx-auto'>
       <img src={show.movie.poster_path} alt="showImage" className='max-md:mx-auto rounded-xl h-104 max-w-70 object-cover' />
       <div className='relative flex flex-col gap-3'>
         <BlurCircle top='-100px' left='-200px' />
@@ -49,6 +49,30 @@ const MovieDetails = () => {
           {timeFormat(show.movie.runtime)} | {show.movie.genres.map(genre=> genre.name).join(", ")} | {show.movie.release_date.split("-")[0]}
         </p>
 
+        <div className='flex items-center flex-wrap gap-4 mt-4'>
+          <button className='flex items-center gap-2 px-7 py-3.5 text-md bg-gray-900/50 hover:bg-gray-900 transition-all rounded-md font-semibold cursor-pointer active:scale-95'>
+            <PlayCircleIcon className='w-5 h-5' />
+            Watch Trailer
+          </button>
+          <a href="#dateSelect" className='px-11 py-3 text-md bg-primary/80 hover:bg-primary-dull transition-all rounded-md font-semibold cursor-pointer active:scale:90'>
+            Buy Tickets
+          </a>
+          <button className='bg-gray-700 p-3 rounded-full transition-all cursor-pointer active:scale:90'>
+            <Heart className='w-5 h-5' />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p className='text-lg font-medium mt-20'>Your Favorite Cast</p>
+    <div className='overflow-x-auto no-scrollbar mt-8 pb-4'>
+      <div className='flex items-center gap-4 w-max px-4'>
+        {show.movie.casts.slice(0,12).map((cast,idx) => (
+          <div className='flex flex-col items-center text-center' key={idx}>
+            <img src={cast.profile_path} alt="cast poster" className='rounded-full h-15 md:h-18 aspect-square object-cover' />
+            <p className='mt-3 font-medium text-xs'>{cast.name}</p>
+          </div>
+        ))}
       </div>
     </div>
    </div>
