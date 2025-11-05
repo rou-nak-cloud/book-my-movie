@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BlurCircle from './BlurCircle'
 import { ChevronLeftIcon } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const DateSelect = ({dateTime, id}) => {
+
+  const navigate = useNavigate();
+
+  const [selected, setSelected] = useState(null);
+  const onBookHandler = () => {
+    if(!selected){
+      return toast('Please select a date')
+    }
+    navigate(`/movies/${id}/${selected}`)
+    scrollTo(0,0)
+  }
+
   return (
     <div id='dateSelect' className='lg:pt-30 pt-20'>
         <div className='flex flex-col md:flex-row items-center justify-between md-max:w-lg gap-10 relative p-8 bg-primary/20 border border-primary/30 rounded-lg'>
@@ -15,7 +29,9 @@ const DateSelect = ({dateTime, id}) => {
                      <ChevronLeftIcon className='w-28 cursor-pointer' />
                     <span className='grid grid-cols-3 md:flex flex-wrap gap-4'>
                     {Object.keys(dateTime).map((date,idx)=>(
-                        <button key={idx} className='flex flex-col items-center justify-center h-14 w-14 aspect-square rounded-md cursor-pointer'>
+                        <button key={idx} 
+                        onClick={()=>setSelected(date)}
+                        className={`flex flex-col items-center justify-center h-14 w-14 aspect-square rounded-md cursor-pointer ${selected === date ? "bg-primary text-white" : "border border-primary/60"}`}>
                            <span className=''>{new Date(date).getDate()}</span>
                            <span className=''>{new Date(date).toLocaleString("en-US", {
                             month: "short"
@@ -26,7 +42,8 @@ const DateSelect = ({dateTime, id}) => {
                 <ChevronLeftIcon className='w-28 rotate-180 cursor-pointer' />
                 </div>
                 <div className='flex items-center'>
-                    <button className='bg-primary text-white px-8 py-2 mt-0 rounded hover:bg-primary/80 transition-all cursor-pointer'>
+                    <button onClick={onBookHandler}
+                     className='bg-primary text-white px-8 py-2 mt-0 rounded hover:bg-primary/80 transition-all cursor-pointer'>
                     Book Now</button>
                 </div>
             </div>
