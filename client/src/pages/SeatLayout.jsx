@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { assets, dummyDateTimeData, dummyShowsData } from '../assets/assets'
 import Loading from '../components/Loading'
-import { ClockIcon } from 'lucide-react'
+import { ArrowBigRightIcon, ClockIcon } from 'lucide-react'
 import isoTimeFormat from '../components/IsoTimeFormat'
 import BlurCircle from '../components/BlurCircle'
 import toast from 'react-hot-toast'
@@ -46,7 +46,7 @@ const SeatLayout = () => {
             const seatId = `${row}${i+1}`;
             return(
               <button key={seatId} onClick={()=> handleSeatClick(seatId)} 
-              className={`h-8 w-8 rounded border border-primary/60 cursor-pointer hover:text-primary/90 transition-colors ease-in-out ${selectedSeats.includes(seatId) && "bg-primary text-white"}`}>
+              className={`h-8 w-8 rounded border border-primary/60 cursor-pointer hover:text-primary/90 transition-colors ease-in-out ${selectedSeats.includes(seatId) && "bg-primary text-white transition-all ease-in"}`}>
                 {seatId}
               </button>
             );
@@ -93,6 +93,11 @@ const SeatLayout = () => {
           ))}
         </div>
         </div>
+
+        <button onClick={()=>navigate('/my-bookings')} 
+        className='flex items-center gap-1 mt-17 px-10 py-3 text-sm bg-primary-dull hover:bg-primary transition-all rounded-full font-medium cursor-pointer active:scale-95'>Proceed to Checkout
+         <ArrowBigRightIcon strokeWidth={3} className='w-4 h-4' />
+        </button>
 
       </div>
 
