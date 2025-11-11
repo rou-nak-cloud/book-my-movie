@@ -102,17 +102,17 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full shadow-sm">
+    <nav className="fixed top-0 left-0 z-50 w-full shadow-sm backdrop-blur-xs bg-blue-950/10 bg-blend-luminosity">
       {/* ─── Top Row ───────────────────────────── */}
       <div className="flex items-center justify-between px-4 sm:px-6 md:px-16 lg:px-36 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={assets.logo} alt="logo" className="w-28 sm:w-32 h-auto" />
+          <img src={assets.logo} alt="logo" className="w-28 sm:w-36 h-auto" />
         </Link>
 
         {/* Search Bar */}
-        <div className="hidden md:flex items-center bg-gray-700 rounded-md px-3 py-2 w-[40%]">
-          <SearchIcon className="text-gray-300 w-5 h-5 mr-2" />
+        <div className="hidden md:flex items-center bg-gray-800/80 rounded-md px-3 py-2 w-[40%]">
+          <SearchIcon className="text-gray-200 w-5 h-5 mr-2" />
           <input
             type="text"
             placeholder="Search for Movies, Events, Plays, Sports and Activities"
@@ -122,7 +122,7 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className="flex items-center gap-4 sm:gap-6">
-          <p className="text-gray-300 text-sm hidden sm:block">INDIA ▼</p>
+          <p className="text-gray-200 text-sm hidden sm:block">INDIA ▼</p>
 
           {!user ? (
             <button
@@ -153,7 +153,7 @@ const Navbar = () => {
 
       {/* Bottom Row   */}
       <div className="hidden md:flex justify-between items-center text-md px-29 py-2 ">
-        <div className="flex gap-6 text-gray-200">
+        <div className="flex gap-6 text-gray-100">
           <Link to="/">Home</Link>
           <Link to="/">Theaters</Link>
           <Link to="/">Releases</Link>
