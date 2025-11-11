@@ -12,6 +12,9 @@ import banner4 from './banner4.jpg'
 import banner5 from './banner5.jpg'
 import banner6 from './banner6.jpg'
 import banner7 from './banner7.jpg'
+import StreamBanner from './streanBanner.jpg'
+import StreamBanner2 from './streanBanner2.png'
+
 
 export const assets = {
     logo,
@@ -20,7 +23,7 @@ export const assets = {
     appStore,
     screenImage,
     profile,
-    
+
     banner1,
     banner2,
     banner3,
@@ -28,7 +31,8 @@ export const assets = {
     banner5,
     banner6,
     banner7,
-
+    StreamBanner2,
+    // StreamBanner,
 }
 
 export const dummyTrailers = [
