@@ -21,7 +21,7 @@ const Carousel = () => {
 
   // Auto slide every 4 seconds
   useEffect(() => {
-    const interval = setInterval(nextSlide, 4000);
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -37,7 +37,7 @@ const Carousel = () => {
             <img
               src={banner}
               alt={`Banner ${index + 1}`}
-              className="w-full h-[190px] sm:h-[250px] md:h-[340px] object-cover rounded-xl"
+              className="w-full h-[190px] sm:h-[250px] md:h-[340px] object-cover rounded-xl px-1"
             />
           </div>
         ))}
