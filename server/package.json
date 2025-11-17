@@ -8,16 +8,21 @@
     "dev": "nodemon server.js",
     "start": "node server.js:"
   },
-  "keywords": ["movieSite","bookingApp"],
+  "keywords": [
+    "movieSite",
+    "bookingApp"
+  ],
   "author": "rounakBakshi",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@clerk/express": "^1.7.49",
     "axios": "^1.13.2",
     "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "inngest": "^3.45.1",
     "mongoose": "^8.19.4"
   },
   "devDependencies": {
