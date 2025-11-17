@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { dummyShowsData } from '../../assets/assets'
 import Loading from '../../components/Loading'
 import Title from '../../components/admin/Title'
-import { ShieldCheckIcon, StarIcon } from 'lucide-react'
+import { DeleteIcon, ShieldCheckIcon, StarIcon } from 'lucide-react'
 import { kConverter } from '../../components/Kconverter'
 
 const AddShows = () => {
@@ -19,16 +19,23 @@ const AddShows = () => {
   }
   const handleDateTimeAdd = () => {
     if(!dateTimeInput) return
-    const [date,time] =dateTimeInput.split('T');
+
+    if (typeof dateTimeInput !== "string" || !dateTimeInput.includes("T")) {
+    console.error("Invalid dateTimeInput:", dateTimeInput);
+    return;
+    }
+    const [date,time] = dateTimeInput.split('T');
     if(!date || !time) return;
 
-    setDateTimeInput((prev) => {
+     setDateTimeSelection((prev) => {
       const times = prev[date] || [];
       if(!times.includes(time)) {
         return {...prev, [date] : [...times, time] };
       }
       return prev;
     })
+      // console.log("Date:", date);
+      // console.log("Time:", time);
   }
   const handleRemoveTime = (date,time) => {
     setDateTimeSelection((prev)=> {
@@ -93,13 +100,39 @@ const AddShows = () => {
           <div className='inline-flex gap-5 border border-gray-700 p-1 pl-3 rounded-lg'>
             <input type="datetime-local" value={dateTimeInput} onChange={(e)=> setDateTimeInput(e.target.value)} className='outline-none rounded-md' />
             <button onClick={handleDateTimeAdd} 
-            className='bg-primary/60 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary-90 cursor-pointer'>
+            className='bg-primary/90 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary-90 cursor-pointer'>
               Add Time
             </button>
           </div>
       </div>
 
       {/* Display selected time */}
+      {Object.keys(dateTimeSelection).length > 0 && (
+        <div className='mt-6'>
+          <h2 className='mb-2'>Selected Date-Time</h2>
+          <ul className='space-y-3'>
+            {Object.entries(dateTimeSelection).map(([date,times])=>(
+              <li key={date}>
+                <div className='font-medium'>{date}</div>
+                <div className='flex flex-wrap gap-2 mt-1 text-sm'>
+                  {times.map((time)=>(
+                    <div key={time}
+                     className='border border-primary px-2 py-1 flex items-center rounded'>
+                      <span className=''>{time}</span>
+                      <DeleteIcon onClick={() => handleRemoveTime(date,time)}
+                      width={15} 
+                      className='ml-2 text-red-600 hover:text-red-700 cursor-pointer' />
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <button className='bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/80 transition-colors cursor-pointer'>
+        Add Show
+      </button>
     </>
   ) : <Loading />
 }
