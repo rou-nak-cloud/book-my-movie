@@ -39,6 +39,28 @@ export const AppProvider = ({children})=> {
             console.log(error)
         }
     }
+
+// fetch Shows
+    const fetchShows = async ()=> {
+        try {
+            const {data} = await axios.get('/api/show/all')
+            if(data.success){
+                setShows(data.shows)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+//   
+
+
+
+    useEffect(()=>{
+        fetchShows()
+    },[])
     useEffect(()=>{
         if(user){
             fetchIsAdmin()
