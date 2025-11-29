@@ -7,29 +7,40 @@ import { dateFormat } from '../../components/dateFormat'
 const ListShows = () => {
   const currency = import.meta.env.VITE_CURRENCY
 
+  const {axios, getToken,user} = useAppContext()
+
     const [shows, setShows] = useState([])
     const [loading, setLoading] = useState(true)
 
     const getAllShows = async ()=> {
       try {
-        setShows([{
-          movie: dummyShowsData[0],
-          showDateTime:"2025-12-25T18:30:00Z",
-          showPrice:159,
-          occupiedSeats:{
-            A1:'user_1',
-            B1:'user_2',
-            C1:'user_3',
+        // setShows([{
+        //   movie: dummyShowsData[0],
+        //   showDateTime:"2025-12-25T18:30:00Z",
+        //   showPrice:159,
+        //   occupiedSeats:{
+        //     A1:'user_1',
+        //     B1:'user_2',
+        //     C1:'user_3',
+        //   }
+        // }]);
+        // setLoading(false);
+        const {data} = await axios.get(`/api/show/all-shows`, {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`
           }
-        }]);
-        setLoading(false);
+        });
+        setShows(data.shows);
+        setLoading(false)
       } catch (error) {
-        console.log(error)
+        console.log("Error in fetching shows",error)
       }
     }
     useEffect(()=>{
-      getAllShows();
-    },[])
+      if(user){
+        getAllShows();
+      }
+    },[user])
 
   return !loading ? (
     <>
