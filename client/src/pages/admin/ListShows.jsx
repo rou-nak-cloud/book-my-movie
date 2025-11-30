@@ -25,7 +25,7 @@ const ListShows = () => {
         //   }
         // }]);
         // setLoading(false);
-        const {data} = await axios.get(`/api/show/all-shows`, {
+        const {data} = await axios.get(`/api/admin/show/all-shows`, {
           headers: {
             Authorization: `Bearer ${await getToken()}`
           }

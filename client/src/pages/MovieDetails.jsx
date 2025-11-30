@@ -7,6 +7,7 @@ import timeFormat from '../components/timeFormat'
 import DateSelect from '../components/DateSelect'
 import MovieCard from '../components/MovieCard'
 import Loading from '../components/Loading'
+import toast from 'react-hot-toast'
 
 const MovieDetails = () => {
   const navigate = useNavigate();
@@ -14,18 +15,44 @@ const MovieDetails = () => {
   console.log(id)
   const [show, setShow] = useState(null)
 
+   const {axios, getToken,user, shows, fetchFavoriteMovies, favoriteMovies, image_base_url} = useAppContext()
+
   const getShow = async ()=> {
-    const show = dummyShowsData.find(show => show._id === id)
-   if(show){
-      setShow({
-      movie: show, // save the single show in movie
-      dateTime: dummyDateTimeData // fetch the date from dummy time js 
-    })
-   }
+  //   const show = dummyShowsData.find(show => show._id === id)
+  //  if(show){
+  //     setShow({
+  //     movie: show, // save the single show in movie
+  //     dateTime: dummyDateTimeData // fetch the date from dummy time js 
+  //   })
+  //  }
+       try {
+        const {data} = await axios.get(`/api/show/${id}`)
+        if(data.success){
+          setShow(data)
+        }
+       } catch (error) {
+        console.log(error)
+       }
+  }
+  const handleFavorite = async()=> {
+    try {
+      if(!user) return toast.error('Please login to proceed');
+
+        const {data} = await axios.post(`/api/user/update-favorite`,{
+          movieId:id},{headers: {
+            Authorization: `Bearer ${await getToken()}`
+          }})
+          if(data.success){
+            await fetchFavoriteMovies()
+            toast.success(data.message)
+          }
+    } catch (error) {
+      console.log(error)
+    }
   }
   // to change every time id changes of that movie
   useEffect(()=>{
-    getShow()
+      getShow()
   },[id])
 
 
@@ -38,7 +65,7 @@ const MovieDetails = () => {
       ></div>
     <div className='px-6 md:px-10 lg:px-30 pt-30 md:pt-70 mb-5 md:mb-10'>
     <div className='flex flex-col md:flex-row gap-8 max-w-6xl mx-auto'>
-      <img src={show.movie.poster_path} alt="showImage" className='max-md:mx-auto rounded-xl h-104 max-w-70 object-cover' />
+      <img src={image_base_url + show.movie.poster_path} alt="showImage" className='max-md:mx-auto rounded-xl h-104 max-w-70 object-cover' />
       <div className='relative flex flex-col gap-3'>
         <BlurCircle top='-100px' left='-200px' />
         <BlurCircle top='130px' left='-390px' />
@@ -61,8 +88,9 @@ const MovieDetails = () => {
           <a href="#dateSelect" className='px-11 py-3 text-md bg-primary/80 hover:bg-primary-dull transition-all rounded-md font-semibold cursor-pointer active:scale:90'>
             Buy Tickets
           </a>
-          <button className='bg-gray-700 p-3 rounded-full transition-all cursor-pointer active:scale:90'>
-            <Heart className='w-5 h-5' />
+          <button onClick={handleFavorite} 
+          className='bg-gray-700 p-3 rounded-full transition-all cursor-pointer active:scale:90'>
+            <Heart className={`w-5 h-5 ${favoriteMovies.find(movie => movie._id === id) ? `fill-primary text-primary` : ''}`} />
           </button>
         </div>
       </div>
@@ -73,7 +101,7 @@ const MovieDetails = () => {
       <div className='flex items-center gap-4 w-max px-4'>
         {show.movie.casts.slice(0,12).map((cast,idx) => (
           <div className='flex flex-col items-center text-center' key={idx}>
-            <img src={cast.profile_path} alt="cast poster" className='rounded-full h-15 md:h-18 aspect-square object-cover' />
+            <img src={image_base_url + cast.profile_path} alt="cast poster" className='rounded-full h-15 md:h-18 aspect-square object-cover' />
             <p className='mt-3 font-medium text-xs'>{cast.name}</p>
           </div>
         ))}
@@ -84,7 +112,7 @@ const MovieDetails = () => {
     
     <p className='text-lg font-medium mt-20 mb-8'>You may also like</p>
     <div className='flex flex-wrap md:pl-18 max-sm:justify-center gap-8'>
-      {dummyShowsData.slice(0,4).map((movie,idx)=>(
+      {shows.slice(0,4).map((movie,idx)=>(
         <MovieCard key={idx} movie={movie} />
       ))}
     </div>
