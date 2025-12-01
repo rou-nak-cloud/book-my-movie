@@ -22,7 +22,7 @@ const ListBookings = () => {
             Authorization: `Bearer ${await getToken()}`
           }
         });
-        setShows(data.bookings);
+        setBookings(data.bookings);
         setLoading(false)
       } catch (error) {
         console.log("Error in fetching bookings",error)
