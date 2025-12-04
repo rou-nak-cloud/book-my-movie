@@ -19,8 +19,8 @@ A Full-Stack Movie Ticket Booking Application.
 
 # ⭐ Key Features (Explained in Detail)
 
-This section explains the whole project in a simple, beginner-friendly way so any new learner can understand how each part works.
-Screenshots below, just hang tight and scroll down as you read...
+## This section explains the whole project in a simple, beginner-friendly way so any new learner can understand how each part works.
+- *Screenshots below, just hang tight and scroll down as you read...*
 ---
 ## 🎬 1. Movie Data Fetched Dynamically From TMDb API
 
