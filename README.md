@@ -1,192 +1,252 @@
-🎬 Book-My-Movie
+# 🎬 Book-My-Movie  
+---
 
-A Full-Stack Movie Ticket Booking Application
+A Full-Stack Movie Ticket Booking Application.
 
-Book-My-Movie is a full-stack React + Node.js movie ticket booking application inspired by platforms like BookMyShow.
-It supports user authentication, movie discovery via TMDb API, seat selection, Stripe payments, booking management, and a full Admin Dashboard for managing movies and shows.
+**Book-My-Movie** is a full-stack **React + Node.js** movie ticket booking application inspired by **BookMyShow**.
 
-This project was built collaboratively over 2 months by:
 
-Rounak — Frontend (React UI, booking flow, contexts, seat layout)
+| 🏆 **Book-My-Movie** | 🛠️ **Tech Stack** |
+|----------------------|--------------------|
+| It includes: <br>• User authentication with Clerk <br>• Movie discovery using the **TMDb API** <br>• Realistic seat selection system <br>• **Stripe** payment integration <br>• Booking history management <br>• Fully functional **Admin Dashboard** for managing movies, pricing, and shows <br>• Fully responsive UI built with **React & Tailwind CSS** <br><br> **Built collaboratively in 2 months by:** <br>• **Rounak** — Frontend (React UI, Tailwind CSS) <br>• **Pradipta** — Backend (Express API, MongoDB, Inngest, Stripe) | **Frontend**:<br>• React <br>• React Router <br>• Context API <br>• CSS / Tailwind CSS <br>• Clerk Authentication <br>• Stripe JS <br><br> **Backend**:<br>• Node.js <br>• Express <br>• MongoDB + Mongoose <br>• Inngest <br>• Stripe Webhooks <br>• TMDb API |
 
-Pradipta — Backend (Node/Express API, MongoDB, Inngest flows, Stripe payment system)
+---
 
-⭐ Key Features (Explained in Detail)
+| 🌐 **Live Site** | 🚀 **Launch App** |
+|:----------------:|:----------------:|
+| <p align="center">Visit the deployed version of the project here</p> | <p align="center">[![Launch App](https://img.shields.io/badge/Launch_App-FF0066?style=for-the-badge&logo=vercel&logoColor=white)](https://moviebooking-fawn.vercel.app/)</p> |
+
+
+# ⭐ Key Features (Explained in Detail)
 
 This section explains the whole project in a simple, beginner-friendly way so any new learner can understand how each part works.
+Screenshots below, just hang tight and scroll down as you read...
+---
+## 🎬 1. Movie Data Fetched Dynamically From TMDb API
 
-🎬 1. Movie Data Fetched Dynamically From TMDb API
+Instead of manually storing posters, images, descriptions, and ratings, casts, we use the **TMDb API** to fetch real-time movie data.
 
-Instead of storing posters, descriptions, genres, or ratings in our own database, we use the TMDb API to fetch movie details in real time.
+### How it works:
+- The React frontend asks the backend for movie data  
+- The backend sends a request to TMDb  
+- TMDb returns:
+  - Poster image  
+  - Title & overview  
+  - Genres  
+  - Ratings  
+  - Release date  
 
-What happens behind the scenes:
+This keeps our movie list **instantly updated**—just like modern OTT/booking apps.
 
-The frontend asks our backend for movie data
+---
 
-The backend sends a request to TMDb
+## 🔐 2. Authentication & Role Management With Clerk
 
-TMDb responds with:
+We implemented **Clerk** to handle all authentication securely and effortlessly.
 
-Movie poster
+### Clerk provides:
+- Sign-up / Sign-in  
+- Google OAuth  
+- Secure JWT sessions  
+- User profile & metadata  
 
-Title
+Using Clerk metadata, we identify:
 
-Overview
+- **Normal Users** → browse movies, select seats, make payments, view bookings  
+- **Admins** → access the Admin Dashboard to control movie listings  
 
-Genres
+This mirrors the access control used in real production applications.
 
-Ratings
+---
 
-Release date
+## 🎟️ 3. Realistic Seat Layout and Booking Logic
 
-This keeps our app always updated with the latest movies—just like a real professional ticket-booking platform.
+We built a cinema-style seat layout system that supports:
 
-🔐 2. Authentication & Role Management With Clerk
+- **Grey** → Available  
+- **Green** → Selected  
+- **Red** → Already booked  
 
-To keep the app secure, we added Clerk, a modern authentication service.
+### Booking process:
+1. User selects seats  
+2. Seats get **temporarily locked**  
+3. Backend verifies availability  
+4. If payment succeeds → seats become **permanently booked**  
+5. If payment fails or tab closed → seats **auto-unlock**  
 
-Clerk provides:
+This is supported by **Inngest**, preventing double bookings and handling timeouts or abandoned bookings.
 
-Sign-up / log-in
+---
 
-Google login
+## 💳 4. Stripe Payment Integration (Test Mode)
 
-Secure JSON web tokens
+Users can book their tickets through **Stripe Checkout** using test card details.
 
-Session handling
+### Payment flow:
+1. User selects seats  
+2. Backend creates a Stripe Checkout session  
+3. User pays → Stripe sends webhook  
+4. Inngest handles the event  
+5. Backend:
+   - Confirms booking  
+   - Marks seats as booked  
+   - Stores booking history  
 
-User profile information
+This setup fully simulates a real payment environment.
 
-We use Clerk metadata to identify two types of users:
+---
 
-Normal User → can browse movies, select seats, make payments, view bookings
-
-Admin → can access the Admin Dashboard to manage movie listings and pricing
-
-This creates a real-world structure used by professional production apps.
-
-🎟️ 3. Realistic Seat Layout and Booking Logic
-
-One of the most advanced features of the project is the realistic seat selection system.
-
-We built a cinema-style seating layout where:
-
-Grey seats → Available
-
-Green seats → Selected
-
-Red seats → Already booked
-
-When a user selects seats:
-
-Seats are temporarily “locked”
-
-The backend verifies they’re still available
-
-If the user pays successfully, the seats become permanently booked
-
-If the user leaves or doesn’t pay → seats unlock automatically
-
-This logic is also assisted by Inngest, which ensures no double-booking and handles edge cases like abandoned payments.
-
-💳 4. Stripe Payment Integration (Test Mode)
-
-Users can complete their ticket purchase using Stripe (in test mode).
-
-Here is the booking flow:
-
-User selects their seats
-
-Backend creates a Stripe Checkout Session
-
-User completes payment using test card
-
-Stripe sends a webhook to the backend
-
-Inngest processes the event and:
-
-Marks seats as booked
-
-Updates booking history
-
-Sends confirmation to user
-
-This setup mimics real-world payment systems used in production apps.
-
-🧑‍💼 5. Admin Dashboard for Movie & Show Management
+## 🧑‍💼 5. Admin Dashboard (Movie & Show Management)
 
 Admins can:
 
-Add new movies to display on the site
+- Add new movies  
+- Set pricing for each movie  
+- Manage showtimes  
+- Activate/deactivate movies  
+- View booking statistics  
 
-Set custom pricing for each movie
+Admin actions are stored in **MongoDB** and update instantly on the client side.
 
-Create showtimes
+---
 
-Manage existing listings
+## ⚙️ 6. Backend API With Express, MongoDB & Mongoose
 
-Mark movies as active/inactive
+A robust backend built using **Node.js, Express, and MongoDB**.
 
-These admin actions are saved in MongoDB and displayed immediately in the user interface.
+### Backend includes:
+- **Models** → Movie, Show, Booking, User  
+- **Controllers** → core business logic  
+- **Routes** → REST API endpoints  
+- **Middlewares**  
+  - Authentication  
+  - Error handling  
+  - Request validation  
 
-This makes the system fully dynamic and manageable without editing code.
+All database operations use **Mongoose**, ensuring data integrity and structure.
 
-⚙️ 6. Backend API With Express, MongoDB & Mongoose
+---
 
-Our backend includes:
+## 🚀 7. Event-Driven Backend With Inngest
 
-Models (Movie, Show, Booking, User)
+We use **Inngest** to handle background tasks and events.
 
-Controllers for each feature
-
-Routes for CRUD operations
-
-Middlewares for:
-
-Authentication
-
-Error handling
-
-Validation
-
-Database connection using Mongoose
-
-Every interaction in the app flows through well-structured controllers—for clean, maintainable code.
-
-🚀 7. Event-Driven Backend With Inngest
-
-Instead of handling all logic inside controllers, we use Inngest—a modern task/event system.
-
-Inngest handles:
-
-Payment success events (from Stripe)
-
-Seat locking timers
-
-Booking confirmations
-
-Database consistency checks
+### Inngest handles:
+- Stripe webhook events  
+- Seat locking timers  
+- Timed unlocks  
+- Booking confirmation  
+- Consistency checks  
 
 This ensures:
+- No race conditions  
+- No overlapping bookings  
+- Smooth payment → booking flow  
 
-No double bookings
+It makes the backend scalable and resilient.
 
-No race conditions
+---
 
-Automatic cleanup of timed-out bookings
+## 🧠 8. Rich Frontend Architecture With React Context
 
-It makes the backend more robust, scalable, and production-ready.
+We use multiple **React Contexts** to manage state:
 
-🧠 8. Rich Frontend Architecture With React Context
+- **Auth Context** → user identity (via Clerk)  
+- **Movie Context** → movie caching and API calls  
+- **Booking Context** → seats, pricing, checkout flow  
+- **Admin Context** → dashboard state  
 
-The React client uses multiple contexts:
+This results in cleaner components and a smoother user experience.
 
-Auth Context from Clerk
+---
 
-Booking Context for seat selections
+<p align="center">
 
-Movie Context for caching movie details
+# 🛠️ Tech Stack
 
-Admin Context for dashboard operations
+| **Frontend** | **Backend** |
+|:------------:|:-----------:|
+| React | Node.js |
+| React Router | Express |
+| Context API | MongoDB + Mongoose |
+| CSS | Inngest |
+| Clerk Authentication | Stripe Webhooks |
+| Stripe JS | TMDb API |
 
-These contexts help us hide complexity, manage global state, and make the UI update instantly across all pages.
+</p>
+
+---
+---
+| Home Page | Trailer Section |
+|----------|------------------|
+| ![Home Page](./screenshots/home_page.png) | ![Trailer Section](./screenshots/trailer_section.png) |
+
+| Movie Details | Seat Layout |
+|--------------|-------------|
+| ![Movie Details](./screenshots/movie_details_page.png) | ![Seat Layout](./screenshots/booking_page.png) |
+
+| Booking Layout | Admin Dashboard |
+|----------------|------------------|
+| ![Booking Layout](./screenshots/my_booking_page.png) | ![Admin Dashboard](./screenshots/admin_dashboard.png) |
+
+| Admin Add Shows | Stripe Checkout |
+|------------------|-----------------|
+| ![Admin add Shows](./screenshots/admin_addShows.png) | ![Stripe Checkout](./screenshots/payment_page.png) |
+
+
+# 🚀 Getting Started
+## 1️⃣ Clone the Repository
+```bash
+ take from the repo link
+git clone https://github.com/rou-nak-cloud/book-my-movie.git
+
+cd client
+npm install
+
+cd ../server
+npm install
+```
+
+## Create Environment variables for server:
+```
+ in .env file ; all will be your secrets..
+- MONGO_URI=
+- TMDB_API_KEY=
+- CLERK_SECRET_KEY=
+- STRIPE_SECRET_KEY=
+- STRIPE_WEBHOOK_SECRET=
+- INNGEST_EVENT_KEY=
+- PORT=5000
+```
+  ## Envire=onment variables for client side:
+  ```
+- VITE_CLERK_PUBLISHABLE_KEY=
+- VITE_API_URL=http://localhost:5000
+  ```
+
+  ```
+  cd server
+  npm run dev
+
+  cd client
+  npm start
+  
+  ```
+ 
+## 📜 License  
+This project is **open-source** and completely **free to use**.
+
+---
+
+## ⭐ Show Your Support  
+If you found this project helpful or inspiring, please consider giving it a ⭐ on GitHub!
+
+### 👨‍💻 Contributors  
+- **Rounak**   
+  🔗 https://github.com/rou-nak-cloud  
+
+- **Pradipta**  
+  🔗 https://github.com/mePradipta30  
+
+Your support motivates us to build more awesome projects! 🚀
+
