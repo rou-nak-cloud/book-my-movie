@@ -1,6 +1,10 @@
 import stripe  from 'stripe'
 import Booking from '../models/Booking.js';
 
+export const config = {
+    api: { bodyParser: false}
+};
+
 export const stripeWebHooks = async (request,response)=>{
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
     const sig = request.headers["stripe-signature"];
@@ -8,7 +12,7 @@ export const stripeWebHooks = async (request,response)=>{
     let event;
 
     try {
-        event = stripeInstance.webhooks.constructEvent(request.body, sig, process.env.STRIPE_SECRET_KEY)
+        event = stripeInstance.webhooks.constructEvent(request.body, sig, process.env.WEBHOOK_SECRET)
     } catch (error) {
         return response.status(400).send(`Webhook Error: ${error.message}`)
     }
