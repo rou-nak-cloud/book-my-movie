@@ -12,9 +12,9 @@ A Full-Stack Movie Ticket Booking Application.
 
 ---
 
-| 🌐 **Live Site** | 🚀 **Launch App** |
-|:----------------:|:----------------:|
-| <p align="center">Visit the deployed version of the project here</p> | <p align="center">[![Launch App](https://img.shields.io/badge/Launch_App-FF0066?style=for-the-badge&logo=vercel&logoColor=white)](https://moviebooking-fawn.vercel.app/)</p> |
+| 🌐 **Live Site** | 🚀 **Launch App** | 📸 **Preview** |
+|:----------------:|:----------------:|:--------------:|
+| Visit the deployed version of the project here | [![Launch App](https://img.shields.io/badge/Launch_App-FF0066?style=for-the-badge&logo=vercel&logoColor=white)](https://moviebooking-fawn.vercel.app/) | Hang tight! images of the project are below — just scroll and enjoy as you read. |
 
 
 # ⭐ Key Features (Explained in Detail)
